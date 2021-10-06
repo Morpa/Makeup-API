@@ -1,0 +1,44 @@
+type Colors {
+    hex_value: String
+    colour_name: String
+}
+
+type Product {
+    id: Int!
+    brand: String
+    name: String
+    price: String
+    description: String
+    rating: String
+    product_type: String
+    api_featured_image: String
+    product_colors: [Colors]
+}
+
+type ProductConnection {
+    limit: Int!
+    offset: Int!
+    count: Int!
+    edges: [Product!]!
+}
+
+input ProductQueryInput {
+    limit: Int = 9
+    offset: Int = 0
+    search: String
+    filter: ProductFilterInput
+}
+
+input ProductFilterInput {
+    product_type: String
+}
+
+type Query {
+    products(query: ProductQueryInput!): ProductConnection!
+    productsByType(query: ProductQueryInput!): ProductConnection!
+    productById(id: Int!): Product
+}
+
+type Root {
+    query: Query!
+}

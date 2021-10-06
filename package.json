@@ -1,5 +1,5 @@
 {
-  "name": "makeupGraphQLAPI",
+  "name": "makeup-graphql-api",
   "description": "Get information of a Makeup API with GraphQL",
   "version": "1.0.0",
   "repository": "https://github.com/Morpa/Makeup-API",
@@ -9,13 +9,17 @@
     "url": "https://morpa.vercel.app/"
   },
   "scripts": {
-    "start": "node src/index.js"
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
   },
   "bin": "src/index.js",
   "dependencies": {
-    "apollo-server-express": "3.3.0",
+    "apollo-server-express": "^2.3.1",
     "express": "^4.16.4",
-    "graphql": "15.6.1",
+    "graphql": "^14.1.1",
     "lodash": "^4.17.11"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.13"
   }
 }
