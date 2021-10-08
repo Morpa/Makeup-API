@@ -14,7 +14,10 @@ const app = express();
 const resolvers = {
   Query: {
     products: (__, args) => {
-      const { limit, offset, filter } = args.query;
+      const { limit, offset, filter, order, orderField } = args.query;
+
+      const filteredProducts = _.omitBy(productsData, _.isNil);
+
       let products = productsData;
 
       if (filter) {
@@ -27,14 +30,20 @@ const resolvers = {
         }
       }
 
+      if (order) {
+        const orderTerm = order;
+
+        products = _.orderBy(products, orderField, orderTerm);
+      }
+
       const count = products.length;
-      const edges = products.slice(offset, offset + limit);
+      const product = products.slice(offset, offset + limit);
 
       return {
         limit,
         offset,
         count,
-        edges,
+        product,
       };
     },
     productById: (_, args) =>
