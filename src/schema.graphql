@@ -4,7 +4,7 @@ type Colors {
 }
 
 type Product {
-    id: Int!
+    id: String!
     brand: String!
     name: String!
     price: String

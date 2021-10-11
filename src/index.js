@@ -16,9 +16,9 @@ const resolvers = {
     products: (__, args) => {
       const { limit, offset, filter, order, orderField } = args.query;
 
-      const filteredProducts = _.omitBy(productsData, _.isNil);
+      const filteredProducts = _.reject(productsData, ["price", "0.0", null]);
 
-      let products = productsData;
+      let products = filteredProducts;
 
       if (filter) {
         if (filter.product_type) {
