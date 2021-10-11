@@ -16,9 +16,14 @@ const resolvers = {
     products: (__, args) => {
       const { limit, offset, filter, order, orderField } = args.query;
 
-      const filteredProducts = _.reject(productsData, ["price", "0.0", null]);
+      const filteredPriceNull = _.reject(productsData, ["price", "0.0", null]);
 
-      let products = filteredProducts;
+      const filteredDescriptionNull = _.reject(filteredPriceNull, [
+        "description",
+        null,
+      ]);
+
+      let products = filteredDescriptionNull;
 
       if (filter) {
         if (filter.product_type) {
